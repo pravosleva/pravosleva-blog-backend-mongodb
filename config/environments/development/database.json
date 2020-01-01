@@ -1,0 +1,19 @@
+{
+  "defaultConnection": "default",
+  "connections": {
+    "default": {
+      "connector": "mongoose",
+      "settings": {
+        "database": "gatsby-blog",
+        "host": "ds231559.mlab.com",
+        "srv": false,
+        "port": "31559",
+        "username": "pravosleva",
+        "password": "admin2020"
+      },
+      "options": {
+        "authenticationDatabase": "gatsby-blog"
+      }
+    }
+  }
+}
