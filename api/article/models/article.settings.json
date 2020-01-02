@@ -14,16 +14,22 @@
       "model": "user"
     },
     "body": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": true
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "photos": {
       "collection": "file",
       "via": "related",
       "plugin": "upload",
       "required": false
+    },
+    "brief": {
+      "type": "string",
+      "required": true
     }
   }
 }
