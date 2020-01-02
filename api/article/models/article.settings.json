@@ -30,6 +30,9 @@
     "brief": {
       "type": "string",
       "required": true
+    },
+    "tags": {
+      "collection": "tag"
     }
   }
 }
