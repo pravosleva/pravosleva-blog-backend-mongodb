@@ -5,7 +5,7 @@
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
-    "develop:pm2": "yarn build && pm2 start yarn --name back-1377-dev -- develop",
+    "develop:pm2": "pm2 start yarn --name back-1377-dev -- develop",
     "start": "strapi start",
     "start:pm2": "yarn build && pm2 start yarn --name back-1377-prod -- start",
     "build": "strapi build",
