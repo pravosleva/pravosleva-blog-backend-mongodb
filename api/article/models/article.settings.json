@@ -21,18 +21,24 @@
       "type": "string",
       "required": true
     },
-    "photos": {
-      "collection": "file",
-      "via": "related",
-      "plugin": "upload",
-      "required": false
-    },
     "brief": {
       "type": "string",
       "required": true
     },
     "tags": {
       "collection": "tag"
+    },
+    "gallery": {
+      "type": "dynamiczone",
+      "components": [
+        "pack.pack"
+      ]
+    },
+    "briefBackground": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
     }
   }
 }
