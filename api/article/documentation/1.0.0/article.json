@@ -707,6 +707,10 @@
                 "type": "string"
               }
             }
+          },
+          "isPublished": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -809,6 +813,10 @@
                 }
               ]
             }
+          },
+          "isPublished": {
+            "type": "boolean",
+            "default": false
           }
         }
       }

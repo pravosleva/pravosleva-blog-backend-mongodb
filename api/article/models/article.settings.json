@@ -39,6 +39,10 @@
       "via": "related",
       "plugin": "upload",
       "required": false
+    },
+    "isPublished": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
