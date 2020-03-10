@@ -4,6 +4,28 @@
  * Lifecycle callbacks for the `article` model.
  */
 
+function debounce(f, ms) {
+  let timer = null;
+
+  return function(...args) {
+    const onComplete = () => {
+      f.apply(this, args);
+      timer = null;
+    };
+
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(onComplete, ms);
+  };
+}
+
+const debouncedAfterUpdate = debounce(({ model }) => {
+  console.log('=== debounced socket.emit for afterUpdate webhook');
+  strapi.io.emit(
+    'ARTICLE_UPDATED',
+    { id: model._conditions ? model._conditions._id : null }
+  );
+}, 4000);
+
 module.exports = {
   // Before saving a value.
   // Fired before an `insert` or `update` query.
@@ -44,6 +66,9 @@ module.exports = {
   // After updating a value.
   // Fired after an `update` query.
   // afterUpdate: async (model, attrs, options) => {},
+  afterUpdate: async (model, result) => {
+    debouncedAfterUpdate({ model, result });
+  },
 
   // Before destroying a value.
   // Fired before a `delete` query.
