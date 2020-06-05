@@ -11,6 +11,17 @@
  */
 
 // const geoip = require('geoip-lite')
+const getObjectByMap = (map) => {
+  const result = Object.create(null)
+  map.forEach((value, key) => {
+    if (value instanceof Map) {
+      result[key] = map_to_object(value)
+    } else {
+      result[key] = value
+    }
+  })
+  return result
+}
 const users = new Map()
 
 module.exports = cb => {
@@ -22,19 +33,19 @@ module.exports = cb => {
     const clientId = socket.id
 
     users.set(clientId, clientIp)
-    socket.broadcast.emit('SOMEBODY_CONNECTED', { msg: `${clientId} connected. Total connected users: ${users.size}` })
+    socket.broadcast.emit('SOMEBODY_CONNECTED', { msg: `${clientId} connected`, users: getObjectByMap(users) })
 
     // Send message on user connection
-    socket.emit('HELLO', { msg: `hello socket, your ID is ${clientId}, your IP is ${clientIp}` })
+    socket.emit('HELLO', { msg: `Hello, your ID is ${clientId}, your IP is ${clientIp}`, users: getObjectByMap(users) })
 
     socket.on('reconnect', (attemptNumber) => {
-      socket.broadcast.emit('SOMEBODY_RECONNECTED', { msg: `${clientId} reconnected ${attemptNumber}, has users= ${users.has(clientId)}. Total connected users: ${users.size}` })
+      socket.broadcast.emit('SOMEBODY_RECONNECTED', { msg: `${clientId} reconnected ${attemptNumber}, has users= ${users.has(clientId)}`, users: getObjectByMap(users) })
     });
     // Listen for user diconnect
     socket.on('disconnect', (socket) => {
       console.log(socket)
       users.delete(clientId)
-      io.emit('SOMEBODY_DISCONNECTED', { msg: `${clientId} disconnected. Total connected users: ${users.size}` })
+      io.emit('SOMEBODY_DISCONNECTED', { msg: `${clientId} disconnected`, users: getObjectByMap(users) })
     })
   })
   strapi.io = io // register socket io inside strapi main object to use it globally anywhere
