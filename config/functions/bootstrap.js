@@ -1,4 +1,5 @@
 'use strict';
+const geoip = require('geoip-lite');
 
 /**
  * An asynchronous bootstrap function that runs before
@@ -29,10 +30,10 @@ module.exports = cb => {
 
   // Listen for user connection
   io.on('connection', function(socket){
-    const clientIp = socket.handshake.headers["x-forwarded-for"].split(",")[0]; // socket.request.connection.remoteAddress
+    const clientIp = socket.request.connection.remoteAddress
     const clientId = socket.id
 
-    users.set(clientId, clientIp)
+    users.set(clientId, { ip: clientIp, geo: geoip.lookup(clientIp) })
     socket.broadcast.emit('SOMEBODY_CONNECTED', { msg: `${clientId} connected`, users: getObjectByMap(users) })
 
     // Send message on user connection
