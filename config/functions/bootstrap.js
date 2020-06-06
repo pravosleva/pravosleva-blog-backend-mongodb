@@ -11,14 +11,27 @@ const geoip = require('geoip-lite');
  * See more details here: https://strapi.io/documentation/3.0.0-beta.x/configurations/configurations.html#bootstrap
  */
 
-// const geoip = require('geoip-lite')
+function isJsonString(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
 const getObjectByMap = (map) => {
   const result = Object.create(null)
-  map.forEach((value, key) => {
+
+  map.forEach((value, key, map) => {
     if (value instanceof Map) {
-      result[key] = map_to_object(value)
+      result[key] = getObjectByMap(value)
     } else {
-      result[key] = value
+      if (isJsonString(JSON.stringify(value))) {
+        result[key] = { ...value }
+      } else {
+        result[key] = value
+      }
     }
   })
   return result
