@@ -29,7 +29,7 @@ module.exports = cb => {
 
   // Listen for user connection
   io.on('connection', function(socket){
-    const clientIp = socket.request.connection.remoteAddress
+    const clientIp = const address = socket.handshake.headers["x-forwarded-for"].split(",")[0]; // socket.request.connection.remoteAddress
     const clientId = socket.id
 
     users.set(clientId, clientIp)
