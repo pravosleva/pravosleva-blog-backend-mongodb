@@ -46,8 +46,11 @@ module.exports = cb => {
     const clientIp = socket.request.connection.remoteAddress
     const clientId = socket.id
 
+    // console.log(socket.request.connection._peername.address)
+    // console.log(socket.ipAddress)
+
     users.set(clientId, { ip: clientIp, geo: geoip.lookup(clientIp) })
-    socket.broadcast.emit('SOMEBODY_CONNECTED', { msg: `${clientId} connected`, users: getObjectByMap(users) })
+    socket.broadcast.emit('SOMEBODY_CONNECTED', { msg: `${clientId} connected, his remoteAddress= ${socket.request.connection.remoteAddress}, ip= ${socket.request.connection._peername.address}`, users: getObjectByMap(users) })
 
     // Send message on user connection
     socket.emit('HELLO', { msg: `Hello, your ID is ${clientId}, your IP is ${clientIp}`, users: getObjectByMap(users) })
