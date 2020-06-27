@@ -1,4 +1,5 @@
-'use strict';
+"use strict";
+const slugify = require("slugify");
 
 /**
  * Lifecycle callbacks for the `article` model.
@@ -7,7 +8,7 @@
 function debounce(f, ms) {
   let timer = null;
 
-  return function(...args) {
+  return function (...args) {
     const onComplete = () => {
       f.apply(this, args);
       timer = null;
@@ -19,14 +20,16 @@ function debounce(f, ms) {
 }
 
 const debouncedAfterUpdate = debounce(({ model }) => {
-  console.log('=== debounced socket.emit for afterUpdate webhook');
-  strapi.io.emit(
-    'ARTICLE_UPDATED',
-    { id: model._conditions ? model._conditions._id : null }
-  );
+  console.log("=== debounced socket.emit for afterUpdate webhook");
+  strapi.io.emit("ARTICLE_UPDATED", {
+    id: model._conditions ? model._conditions._id : null,
+  });
 }, 4000);
 
 module.exports = {
+  // DOCS: https://strapi.io/documentation/v3.x/guides/slug.html#auto-create-update-the-slug-attribute
+  // lifecycle? WTF?
+
   // Before saving a value.
   // Fired before an `insert` or `update` query.
   // beforeSave: async (model, attrs, options) => {},
@@ -61,7 +64,12 @@ module.exports = {
 
   // Before updating a value.
   // Fired before an `update` query.
-  // beforeUpdate: async (model, attrs, options) => {},
+  beforeUpdate: async (model) => {
+    // console.log("2.1 beforeUpdate, model= ", model._update);
+    if (!!model._update.title) {
+      model._update.slug = await slugify(model._update.title).toLowerCase();
+    }
+  },
 
   // After updating a value.
   // Fired after an `update` query.

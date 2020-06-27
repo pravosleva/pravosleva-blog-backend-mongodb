@@ -711,6 +711,9 @@
           "isPublished": {
             "type": "boolean",
             "default": false
+          },
+          "slug": {
+            "type": "string"
           }
         }
       },
@@ -817,6 +820,9 @@
           "isPublished": {
             "type": "boolean",
             "default": false
+          },
+          "slug": {
+            "type": "string"
           }
         }
       }
