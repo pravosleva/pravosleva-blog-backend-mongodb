@@ -21,8 +21,19 @@ function debounce(f, ms) {
 
 const debouncedAfterUpdate = debounce(({ model }) => {
   console.log("=== debounced socket.emit for afterUpdate webhook");
+  console.log(model);
   strapi.io.emit("ARTICLE_UPDATED", {
     id: model._conditions ? model._conditions._id : null,
+    slug: model._conditions ? model._conditions.slug : null,
+  });
+}, 4000);
+
+const debouncedAfterCreate = debounce(({ model }) => {
+  console.log("=== debounced socket.emit for afterCreate webhook");
+  console.log(model);
+  strapi.io.emit("ARTICLE_UPDATED", {
+    id: model._conditions ? model._conditions._id : null,
+    slug: model._conditions ? model._conditions.slug : null,
   });
 }, 4000);
 
@@ -61,6 +72,9 @@ module.exports = {
   // After creating a value.
   // Fired after an `insert` query.
   // afterCreate: async (model, attrs, options) => {},
+  afterCreate: async (model, attrs, _options) => {
+    debouncedAfterCreate({ model, attrs });
+  },
 
   // Before updating a value.
   // Fired before an `update` query.
