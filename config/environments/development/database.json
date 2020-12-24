@@ -4,15 +4,13 @@
     "default": {
       "connector": "mongoose",
       "settings": {
-        "database": "gatsby-blog",
-        "host": "ds231559.mlab.com",
-        "srv": false,
-        "port": "31559",
-        "username": "pravosleva",
-        "password": "admin2020"
+        "port": "${process.env.DATABASE_PORT || 27017}",
+        "uri": "mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}/${process.env.DATABASE_NAME}?retryWrites=true&w=majority"
       },
       "options": {
-        "authenticationDatabase": "gatsby-blog"
+        "ssl": "${process.env.DATABASE_SSL || false}",
+        "useUnifiedTopology": "${process.env.USE_UNIFIED_TOPOLOGY || false}",
+        "authenticationDatabase": "${process.env.DATABASE_AUTHENTICATION_DATABASE || ''}"
       }
     }
   }
