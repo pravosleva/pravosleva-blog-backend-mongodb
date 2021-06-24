@@ -110,3 +110,8 @@ coverage
 exports
 .cache
 build
+
+############################
+# Deploy tool
+############################
+deploy-app-config.json
