@@ -579,7 +579,10 @@
               "required": [
                 "id",
                 "username",
-                "email"
+                "email",
+                "fullName",
+                "passportSN",
+                "dateOfBirth"
               ],
               "properties": {
                 "id": {
@@ -607,6 +610,15 @@
                   "type": "boolean"
                 },
                 "role": {
+                  "type": "string"
+                },
+                "fullName": {
+                  "type": "string"
+                },
+                "passportSN": {
+                  "type": "integer"
+                },
+                "dateOfBirth": {
                   "type": "string"
                 }
               }

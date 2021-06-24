@@ -52,6 +52,19 @@
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
+    },
+    "fullName": {
+      "type": "string",
+      "required": true,
+      "minLength": 5
+    },
+    "passportSN": {
+      "type": "biginteger",
+      "required": true
+    },
+    "dateOfBirth": {
+      "required": true,
+      "type": "date"
     }
   }
 }

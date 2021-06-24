@@ -1188,7 +1188,10 @@
         "required": [
           "id",
           "username",
-          "email"
+          "email",
+          "fullName",
+          "passportSN",
+          "dateOfBirth"
         ],
         "properties": {
           "id": {
@@ -1244,13 +1247,26 @@
                 }
               }
             }
+          },
+          "fullName": {
+            "type": "string",
+            "minLength": 5
+          },
+          "passportSN": {
+            "type": "integer"
+          },
+          "dateOfBirth": {
+            "type": "string"
           }
         }
       },
       "NewUsers-PermissionsUser": {
         "required": [
           "username",
-          "email"
+          "email",
+          "fullName",
+          "passportSN",
+          "dateOfBirth"
         ],
         "properties": {
           "username": {
@@ -1280,6 +1296,16 @@
             "default": false
           },
           "role": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string",
+            "minLength": 5
+          },
+          "passportSN": {
+            "type": "integer"
+          },
+          "dateOfBirth": {
             "type": "string"
           }
         }

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/28/2020 12:25:39 AM"
+    "x-generation-date": "06/24/2021 10:02:40 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3750,7 +3750,10 @@
             "required": [
               "id",
               "username",
-              "email"
+              "email",
+              "fullName",
+              "passportSN",
+              "dateOfBirth"
             ],
             "properties": {
               "id": {
@@ -3778,6 +3781,15 @@
                 "type": "boolean"
               },
               "role": {
+                "type": "string"
+              },
+              "fullName": {
+                "type": "string"
+              },
+              "passportSN": {
+                "type": "integer"
+              },
+              "dateOfBirth": {
                 "type": "string"
               }
             }
@@ -4175,7 +4187,10 @@
               "required": [
                 "id",
                 "username",
-                "email"
+                "email",
+                "fullName",
+                "passportSN",
+                "dateOfBirth"
               ],
               "properties": {
                 "id": {
@@ -4203,6 +4218,15 @@
                   "type": "boolean"
                 },
                 "role": {
+                  "type": "string"
+                },
+                "fullName": {
+                  "type": "string"
+                },
+                "passportSN": {
+                  "type": "integer"
+                },
+                "dateOfBirth": {
                   "type": "string"
                 }
               }
@@ -4243,7 +4267,10 @@
         "required": [
           "id",
           "username",
-          "email"
+          "email",
+          "fullName",
+          "passportSN",
+          "dateOfBirth"
         ],
         "properties": {
           "id": {
@@ -4299,13 +4326,26 @@
                 }
               }
             }
+          },
+          "fullName": {
+            "type": "string",
+            "minLength": 5
+          },
+          "passportSN": {
+            "type": "integer"
+          },
+          "dateOfBirth": {
+            "type": "string"
           }
         }
       },
       "NewUsers-PermissionsUser": {
         "required": [
           "username",
-          "email"
+          "email",
+          "fullName",
+          "passportSN",
+          "dateOfBirth"
         ],
         "properties": {
           "username": {
@@ -4335,6 +4375,16 @@
             "default": false
           },
           "role": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string",
+            "minLength": 5
+          },
+          "passportSN": {
+            "type": "integer"
+          },
+          "dateOfBirth": {
             "type": "string"
           }
         }
